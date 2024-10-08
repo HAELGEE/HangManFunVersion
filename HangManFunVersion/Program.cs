@@ -7,27 +7,22 @@ internal class Program
         Main main = new Main();
         Word word = new Word();
         Color color = new Color();
+        
         //main.MainMenu();
 
-        string test = "A";
-        for (int i = 0; i < word.keyBoard.Count; i++)
-        {
+        string test = "A"; // Ett test för att se om färgen ändras, vilket den nu gör!
 
-        }
-
-        foreach (string c in word.keyBoard)
+        // Här ändras färgen beroende på gissade bokstäver
+        foreach (string c in word.KeyBoard)
         {
             if (c.Contains(test))
-            {
                 color.Gray(c);
-            }
+
             else
                 color.White(c);
-
-            //Console.WriteLine(c);
-
         }
-
+        word.GuessTheWord();
+        Console.WriteLine(word.MaskedWord);
 
     }
 }

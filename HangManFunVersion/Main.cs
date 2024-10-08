@@ -16,6 +16,8 @@ internal class Main
         bool loop = true;
         while (loop)
         {
+            Console.Clear();
+
 
             switch (0)
             {
