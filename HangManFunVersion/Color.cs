@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace HangManFunVersion;
 internal class Color
 {
-    public void Gray(string input)
+    public void Black(string input)
     {
-        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.ForegroundColor = ConsoleColor.Black;
         Console.Write(input);
-        Console.ResetColor();
+        //Console.ResetColor();
     }
     public void White(string input)
     {
         Console.ForegroundColor = ConsoleColor.White;
         Console.Write(input);
-        Console.ResetColor();
+        //Console.ResetColor();
 
     }
 }
