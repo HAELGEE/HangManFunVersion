@@ -8,23 +8,35 @@ namespace HangManFunVersion;
 internal class Person
 {
     public string? Name;
-    public void Player()
+    public List<string> HighScore = new List<string>();
+    public void GetPlayerName()
     {
         while (true)
         {
             Console.Write("Please enter Your name: ");
-            if(Console.ReadLine() == null)
+            var validPlayerName = Console.ReadLine();
+
+            if (validPlayerName == null || validPlayerName == "")
                 Console.WriteLine("Invalid input, try again.");
             else
             {
-                Name = Console.ReadLine();
+                Name = validPlayerName;
                 break;
             }
         }
     }
-    public void Scoreboard()
+    public void GetScoreboard()
     {
-        Console.WriteLine("Inget här än så länge");
+        foreach (var name in HighScore)
+            Console.WriteLine(name);
+
         Console.ReadKey();
     }
+    public void SetScoreboard(string name, int points)
+    {
+        HighScore.Add($"Name: {name}, Points: {points}");
+        Console.WriteLine($"Name: {name}, Points: {points} added to Highscore");
+        Console.ReadKey();
+    }
+
 }

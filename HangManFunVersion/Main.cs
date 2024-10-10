@@ -55,10 +55,11 @@ internal class Main
                 {
                     case 0:
                         word.TheMaskedWord();
+                        //person.GetPlayerName();
                         word.GuessTheWord();
                         break;
                     case 1:
-                        person.Scoreboard();
+                        person.GetScoreboard();
                         break;
                     case 2:
                         loop = false;

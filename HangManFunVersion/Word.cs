@@ -8,7 +8,17 @@ using System.Threading.Tasks;
 namespace HangManFunVersion;
 internal class Word
 {
-    public Color color = new Color();
+
+    //public Word(Person person)
+    //{
+    //    PersonName = person.Name;     
+    //}
+    
+    public Person person = new Person();
+
+    //public string PersonName;   
+
+    
 
     public string? GuessedLetter;
     public List<string> GuessedLetterToList = new List<string>();
@@ -28,9 +38,11 @@ internal class Word
 
     public void TheMaskedWord()
     {
+
         // Rensar konsolen för att få det mer "Clear"
         Console.Clear();
         string? validWord;
+        // Sätter en while-loop för att få spelaren till att skriva in rätt inmatning
         while (true)
         {
             Console.Clear();
@@ -61,9 +73,12 @@ internal class Word
         }
 
     }
+    
+
 
     public void GuessTheWord()
     {
+        person.GetPlayerName();
         // Sätter en while-loop för att få spelaren till att fortsätta gissa tills ordet är klart
         while (true)
         {
@@ -85,6 +100,8 @@ internal class Word
             {
                 Console.WriteLine("\nYou have now guessed the Word. Congratulations :)");
                 Console.WriteLine($"Total attempts to finish the word: {Guesses} wich gave you {Points}.Points");
+                person.SetScoreboard(person.Name, Points);
+                
                 Console.ReadKey();
                 break;
             }
@@ -129,7 +146,6 @@ internal class Word
                     if (!SecretWordString!.Contains(GuessedLetter))
                         if (Points != 0)
                             Points -= 10;
-
 
                     Guesses++;
                     loop = false;
