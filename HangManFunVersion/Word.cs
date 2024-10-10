@@ -21,8 +21,7 @@ internal class Word
     public List<char> SecretWord = new List<char>();
     public string? SecretWordString;
 
-    public List<string>? MaskedWord = new List<string>();
-    public string? MaskedWordString;
+    public List<string>? MaskedWord = new List<string>();    
 
     public int Guesses = 0;
     public int Points = 100;
@@ -70,10 +69,7 @@ internal class Word
             // Denna sätter hur långt det maskerade ordet är som man skall gissa på
             MaskedWord!.Add("_");
         }
-
     }
-
-
 
     public void GuessTheWord()
     {
@@ -97,6 +93,9 @@ internal class Word
             {
                 Console.Write(c);
             }
+
+            // Sätter ihop listan till en sträng
+            string MaskedWordString = string.Concat(MaskedWord);            
 
             // När spelaren har gissat rätt skrivs det i if-satsen ut
             if (MaskedWordString == SecretWordString)
@@ -128,7 +127,6 @@ internal class Word
                         if (SecretWord[i] == Convert.ToChar(GuessedLetter))
                         {
                             MaskedWord[i] = GuessedLetter;
-                            MaskedWordString = MaskedWordString + GuessedLetter;
                         }
                     }
 
