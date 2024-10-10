@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,12 +21,13 @@ internal class Main
         while (loop)
         {
             // För att skapa en ny person för varje gång man går in och spelar.
-            Person person = new Person();
+            var person = Person.Instance;
             // För att skapa ett nytt ord för varje gång man går in och spelar.
             Word word = new Word();
             Console.Clear();
             Console.WriteLine("Fun version of Hangman by #Christofer Hägg");
 
+            
             for (int i = 0; i < menuChoice.Length; i++)
             {
                 if (i == menuSelecter)
@@ -54,8 +56,7 @@ internal class Main
                 switch (menuSelecter)
                 {
                     case 0:
-                        word.TheMaskedWord();
-                        //person.GetPlayerName();
+                        word.TheMaskedWord();                        
                         word.GuessTheWord();
                         break;
                     case 1:

@@ -9,16 +9,7 @@ namespace HangManFunVersion;
 internal class Word
 {
 
-    //public Word(Person person)
-    //{
-    //    PersonName = person.Name;     
-    //}
-    
-    public Person person = new Person();
-
-    //public string PersonName;   
-
-    
+    public Person person = Person.Instance;
 
     public string? GuessedLetter;
     public List<string> GuessedLetterToList = new List<string>();
@@ -78,7 +69,9 @@ internal class Word
 
     public void GuessTheWord()
     {
+        // Kallar på metoden för att få namnet på spelare som skall gissa.
         person.GetPlayerName();
+
         // Sätter en while-loop för att få spelaren till att fortsätta gissa tills ordet är klart
         while (true)
         {
