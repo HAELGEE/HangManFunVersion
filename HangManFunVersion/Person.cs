@@ -20,6 +20,7 @@ internal class Person
 
     public void GetPlayerName()
     {
+        Console.Clear();
         while (true)
         {
             Console.Write("Please enter Your name: ");

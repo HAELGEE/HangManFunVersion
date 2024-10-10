@@ -8,6 +8,10 @@ using System.Threading.Tasks;
 namespace HangManFunVersion;
 internal class Word
 {
+    //"Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " " +
+    //    " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " " +
+    //    " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", " " +
+    //    " \n                 ", "===SPACE===", "\n"};
 
     public Person person = Person.Instance;
 
@@ -23,9 +27,13 @@ internal class Word
     public int Guesses = 0;
     public int Points = 100;
 
-    public List<string> KeyBoard = new List<string> {"Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " " +
-        " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " " +
-        " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", "\n"};
+    public List<string> KeyBoard = new List<string> {
+        "Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " ",
+            " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " ",
+            " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", " ",
+           "\n ", "    ===SPACE===", "\n",
+    };
+
 
     public void TheMaskedWord()
     {
@@ -38,7 +46,7 @@ internal class Word
         {
             Console.Clear();
 
-            Console.WriteLine("Please enter a word u want other to guess on");
+            Console.WriteLine("Please enter a word you want other to guess on");
             validWord = Console.ReadLine()!.ToUpper();
             SecretWordString = validWord;
             if (validWord == null)
@@ -64,7 +72,7 @@ internal class Word
         }
 
     }
-    
+
 
 
     public void GuessTheWord()
@@ -78,10 +86,12 @@ internal class Word
             Console.Clear();
             Console.Write($"The Secretword: ");
             foreach (string c in MaskedWord!)
-            { Console.Write(c); }
+                Console.Write(c);
 
-            // För att skapa ett mellanrum i runtime
-            Console.WriteLine("\n");
+            Console.Write($"\nGuesses: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(Guesses);
+            Console.ResetColor();
 
             foreach (string c in KeyBoard)
             {
@@ -94,7 +104,7 @@ internal class Word
                 Console.WriteLine("\nYou have now guessed the Word. Congratulations :)");
                 Console.WriteLine($"Total attempts to finish the word: {Guesses} wich gave you {Points}.Points");
                 person.SetScoreboard(person.Name, Points);
-                
+
                 Console.ReadKey();
                 break;
             }
@@ -113,9 +123,6 @@ internal class Word
                     Console.WriteLine("You have already guessed on this letter.");
                 else
                 {
-                    /* ska ersätta _ med den angivna bokstaven om den är korrekt
-                     * MaskedWord innehåller _ 
-                     */
                     for (int i = 0; i < SecretWord.Count; i++)
                     {
                         if (SecretWord[i] == Convert.ToChar(GuessedLetter))
@@ -126,12 +133,16 @@ internal class Word
                     }
 
                     GuessedLetterToList.Add(GuessedLetter);
+
+
                     for (int i = 0; i < KeyBoard.Count; i++)
-                    {
+                    {  
                         if (KeyBoard[i].Contains(GuessedLetter))
                         {
-                            KeyBoard[i] = "  ";
-
+                            if (GuessedLetter[0] == (char)32)
+                                KeyBoard[35] = "  ";
+                            else
+                                KeyBoard[i] = "  ";
                         }
                     }
 
