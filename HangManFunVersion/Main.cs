@@ -9,8 +9,6 @@ internal class Main
 {
     public void MainMenu()
     {
-        Person person = new Person();
-        Word word = new Word();
 
         string[] menuChoice = {
             "Start game",
@@ -21,6 +19,10 @@ internal class Main
         bool loop = true;
         while (loop)
         {
+            // För att skapa en ny person för varje gång man går in och spelar.
+            Person person = new Person();
+            // För att skapa ett nytt ord för varje gång man går in och spelar.
+            Word word = new Word();
             Console.Clear();
             Console.WriteLine("Fun version of Hangman by #Christofer Hägg");
 
