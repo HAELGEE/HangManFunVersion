@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HangManFunVersion;
 internal class Person
 {
-    public string Name;
+    public string? Name;
     public void Player()
     {
         while (true)
@@ -24,6 +24,7 @@ internal class Person
     }
     public void Scoreboard()
     {
-
+        Console.WriteLine("Inget här än så länge");
+        Console.ReadKey();
     }
 }

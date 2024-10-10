@@ -10,26 +10,58 @@ internal class Main
     public void MainMenu()
     {
         Person person = new Person();
-        string Menu = "Start game" +
-            "Scoreboard" +
-            "Quit";
+        Word word = new Word();
+
+        string[] menuChoice = {
+            "Start game",
+            "Scoreboard",
+            "Quit"
+        };
+        int menuSelecter = 0;
         bool loop = true;
         while (loop)
         {
             Console.Clear();
+            Console.WriteLine("Fun version of Hangman by #Christofer Hägg");
 
-
-            switch (0)
+            for (int i = 0; i < menuChoice.Length; i++)
             {
-                case 0:
+                if (i == menuSelecter)
+                {
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"---> \t {menuChoice[i]}");
+                    Console.ResetColor();
+                    Console.CursorVisible = false;
+                }
+                else
+                    Console.WriteLine(menuChoice[i]);
+            }
 
-                    break;
-                case 1:
-                    person.Scoreboard();
-                    break;
-                case 2:
-                    loop = false;
-                    break;
+            var key = Console.ReadKey(true).Key;
+
+            if (key == ConsoleKey.DownArrow && menuSelecter < menuChoice.Length - 1)
+            {
+                menuSelecter++;
+            }
+            else if (key == ConsoleKey.UpArrow && menuSelecter >= 1)
+            {
+                menuSelecter--;
+            }
+            else if (key == ConsoleKey.Enter)
+            {
+                switch (menuSelecter)
+                {
+                    case 0:
+                        word.TheMaskedWord();
+                        word.GuessTheWord();
+                        break;
+                    case 1:
+                        person.Scoreboard();
+                        break;
+                    case 2:
+                        loop = false;
+                        break;
+                }
             }
         }
     }

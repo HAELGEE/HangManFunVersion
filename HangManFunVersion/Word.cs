@@ -10,64 +10,104 @@ internal class Word
 {
     public Color color = new Color();
 
-    public string GuessedLetter;
-    public List<char> GuessedLetterToList = new List<char>();
+    public string? GuessedLetter;
+    public List<string> GuessedLetterToList = new List<string>();
 
     public List<char> SecretWord = new List<char>();
-    public string MaskedWord;
-    public List<string> KeyBoard = new List<string> {"Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å\n" +
-        "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä\n" +
-        "    Z ", "X ", "C ", "V ", "B ", "N ", "M\n" };
+    public string? SecretWordString;
 
+    public List<string>? MaskedWord = new List<string>();
+    public string? MaskedWordString;
+
+    public int Guesses = 0;
+
+    public List<string> KeyBoard = new List<string> {"Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " " +
+        " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " " +
+        " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", "\n"};
+    
     public void TheMaskedWord()
     {
+        // Rensar konsolen för att få det mer "Clear"
+        Console.Clear();
+
         Console.WriteLine("Please enter a word u want other to guess on");
-        string validWord = Console.ReadLine();
+        string validWord = Console.ReadLine()!.ToUpper();
+        SecretWordString = validWord;
 
         for (int i = 0; i < validWord.Length; i++)
         {
             // Lägger in ordet som andra skall gissa på i Lisan
             SecretWord.Add(validWord[i]);
             // Denna sätter hur långt det maskerade ordet är som man skall gissa på
-            MaskedWord = "_" + MaskedWord;
-        }
-        Console.WriteLine(MaskedWord);
+            MaskedWord!.Add("_");
+        }           
     }
 
     public void GuessTheWord()
     {
-        foreach (string c in KeyBoard)
-        {
-            Console.Write(c);
-        }
-
+        // Sätter en while-loop för att få spelaren till att fortsätta gissa tills ordet är klart
         while (true)
         {
-            Console.Write("Enter a letter to the guess: ");
-            GuessedLetter = Console.ReadLine();
-            if (GuessedLetter == null)
-                Console.WriteLine("You need to enter a letter");
-            else if (GuessedLetter.Length > 1)
-                Console.WriteLine("The guess cant be longer then ONE letter.");
-            //else if ()
-            //    break;
-            foreach (var arg in GuessedLetterToList)
+            Console.Clear();
+            Console.Write($"The Secretword: ");
+            foreach (string c in MaskedWord!)
+               { Console.Write(c); }
+
+            // För att skapa ett mellanrum i runtime
+            Console.WriteLine("\n");
+
+            foreach (string c in KeyBoard)
             {
-                // Här vill jag testa mig fram för att se om jag kan
-                // köra en .Contain på GuessedLetterToList.ToString()
-                // utan att använda mig av foreach?
-                if (GuessedLetter == GuessedLetterToList.ToString())
+                Console.Write(c);
+            }
+
+            bool loop = true;
+            // Sätter en while-loop för att få spelaren till att skriva in rätt inmatning
+            while (loop)
+            {
+                Console.Write("Enter a letter to the guess: ");
+                GuessedLetter = Console.ReadLine()!.ToUpper();
+                if (GuessedLetter == null)
+                    Console.WriteLine("You need to enter a letter");
+                else if (GuessedLetter.Length > 1)
+                    Console.WriteLine("The guess can't be longer then ONE letter.");
+                else if (GuessedLetterToList.Contains(GuessedLetter))                                  
+                    Console.WriteLine("You have already guessed on this letter.");                
+                else
                 {
-                    foreach (string c in KeyBoard)
+                    /* ska ersätta _ med den angivna bokstaven om den är korrekt
+                     * MaskedWord innehåller _ 
+                     */
+                    for (int i = 0;i < SecretWord.Count; i++)                    
                     {
-                        // Här ändras färgen beroende på gissade bokstäver
-                        if (c.Contains(GuessedLetter))
-                            color.Black(c);
+                        if (SecretWord[i] == Convert.ToChar(GuessedLetter))
+                        {
+                            MaskedWord[i] = GuessedLetter;
+                            MaskedWordString = MaskedWordString + GuessedLetter;
+                        }
                     }
+                    GuessedLetterToList.Add(GuessedLetter);
+                    for (int i = 0; i < KeyBoard.Count; i++)
+                    {
+                        if (KeyBoard[i].Contains(GuessedLetter))
+                        {
+                            KeyBoard[i] = "  ";
+                        }
+                    }
+                    Guesses++;
+                    loop = false;
                 }
             }
 
+            // När spelaren har gissat rätt skrivs det i if-satsen ut
+            if (MaskedWordString == SecretWordString)
+            {
+                Console.WriteLine("\nYou have now guessed the Word. Congratulations :)");
+                Console.WriteLine($"Total attempts to finish the word: {Guesses}");
+                Console.ReadKey();
+                break;
+            }
+            
         }
     }
-
 }

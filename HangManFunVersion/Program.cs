@@ -8,11 +8,10 @@ internal class Program
         Word word = new Word();
         Color color = new Color();
 
-        //main.MainMenu();
-
+        main.MainMenu();
         
-        word.TheMaskedWord();
-        word.GuessTheWord();
+        //word.TheMaskedWord();
+        //word.GuessTheWord();
 
     }
 }

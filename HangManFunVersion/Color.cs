@@ -9,8 +9,8 @@ internal class Color
 {
     public void Black(string input)
     {
-        Console.ForegroundColor = ConsoleColor.Black;
-        Console.Write(input);
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        //Console.Write(input);
         //Console.ResetColor();
     }
     public void White(string input)
