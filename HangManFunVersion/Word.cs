@@ -21,29 +21,30 @@ internal class Word
     public List<char> SecretWord = new List<char>();
     public string? SecretWordString;
 
-    public List<string>? MaskedWord = new List<string>();    
+    public List<string>? MaskedWord = new List<string>();
 
     public int Guesses = 0;
     public int Points = 100;
+
+    //public static string spaceWrite;
 
     public List<string> KeyBoard = new List<string> {
         "Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " ",
             " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " ",
             " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", " ",
-           "\n ", "    ===SPACE===", "\n",
+           "\n ", $"    ===space===", "\n",
     };
 
-
     public void TheMaskedWord()
-    {
-
+    {        
+        
         // Rensar konsolen för att få det mer "Clear"
         Console.Clear();
         string? validWord;
         // Sätter en while-loop för att få spelaren till att skriva in rätt inmatning
         while (true)
         {
-            Console.Clear();
+            Console.Clear();            
 
             Console.WriteLine("Please enter a word you want other to guess on");
             validWord = Console.ReadLine()!.ToUpper();
@@ -95,7 +96,7 @@ internal class Word
             }
 
             // Sätter ihop listan till en sträng
-            string MaskedWordString = string.Concat(MaskedWord);            
+            string MaskedWordString = string.Concat(MaskedWord);
 
             // När spelaren har gissat rätt skrivs det i if-satsen ut
             if (MaskedWordString == SecretWordString)
@@ -134,9 +135,10 @@ internal class Word
 
 
                     for (int i = 0; i < KeyBoard.Count; i++)
-                    {  
+                    {
                         if (KeyBoard[i].Contains(GuessedLetter))
                         {
+
                             if (GuessedLetter[0] == (char)32)
                                 KeyBoard[35] = "  ";
                             else
