@@ -138,7 +138,6 @@ internal class Word
                     {
                         if (KeyBoard[i].Contains(GuessedLetter))
                         {
-
                             if (GuessedLetter[0] == (char)32)
                                 KeyBoard[35] = "  ";
                             else
