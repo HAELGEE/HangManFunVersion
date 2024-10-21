@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace HangManFunVersion;
 internal class Word
-{
-    //"Q ", "W ", "E ", "R ", "T ", "Y ", "U ", "I ", "O ", "P ", "Å", " " +
-    //    " \n", "A ", "S ", "D ", "F ", "G ", "H ", "J ", "K ", "L ", "Ö ", "Ä", " " +
-    //    " \n    ", "Z ", "X ", "C ", "V ", "B ", "N ", "M", " " +
-    //    " \n                 ", "===SPACE===", "\n"};
-
+{    
     public Person person = Person.Instance;
 
     public string? GuessedLetter;
@@ -85,15 +80,25 @@ internal class Word
             foreach (string c in MaskedWord!)
                 Console.Write(c);
 
-            Console.Write($"\nGuesses: ");
+            Console.Write($"\n\nGuesses: ");
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(Guesses);
             Console.ResetColor();
 
+            Console.Write("Points: ");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(Points);
+            Console.ResetColor();
+
+            //Mellanrum i runtime
+            Console.WriteLine();
+                        
             foreach (string c in KeyBoard)
-            {
+            {                
                 Console.Write(c);
             }
+            //Mellanrum i runtime
+            Console.WriteLine();
 
             // Sätter ihop listan till en sträng
             string MaskedWordString = string.Concat(MaskedWord);

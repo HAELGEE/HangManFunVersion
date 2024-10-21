@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HangManFunVersion;
 internal class Person
 {
-    // Skapar en statisk instans utav personklassen för att inte skapa nya "personer" i varje klass
+    //Skapar en statisk instans utav personklassen för att inte skapa nya "personer" i varje klass
     public static Person Instance = new Person();
 
     // Sätter "originalet" utav Person klassen som privat så inget utifrån ändras i denna konstruktorn
@@ -36,11 +36,13 @@ internal class Person
         }
     }
     public void GetScoreboard()
-    {        
-        // Fixa så denna är sorterad.
+    {
+        Console.Clear();
+        Console.WriteLine($"==== HIGHSCORE LIST ====");
+       
         foreach (var name in HighScore)
         {
-            Console.WriteLine(name);            
+            Console.WriteLine(name);
         }
 
         Console.ReadKey();
@@ -48,7 +50,7 @@ internal class Person
     public void SetScoreboard(string name, int points)
     {
         HighScore.Add($"Name: {name}, Points: {points}");
-        Console.WriteLine($"Name: {name}, Points: {points} - Added to Highscore");        
+        Console.WriteLine($"Name: {name}, Points: {points} - Added to Highscore");
     }
 
 }
